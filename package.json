@@ -2,8 +2,29 @@
 	"name": "daome",
 	"description": "Direct Access Object for Mongoose with Express.js",
 	"version": "1.0.3",
-	"license" : "GPL-3.0",
+	"license": "GPL-3.0",
 	"main": "index.js",
+	"keywords": [
+		"dao",
+		"mongoose",
+		"mongo",
+		"mongodb",
+		"model",
+		"view",
+		"controller",
+		"express",
+		"expressjs"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/mykiimike/daome.git"
+	},
+	"homepage": "https://github.com/mykiimike/daome",
+	"bugs": {
+		"email": "mv@verman.fr",
+		"url": "https://github.com/mykiimike/daome/issues"
+	},
+	"author": "Michael Vergoz <mv@verman.fr>",
 	"dependencies": {
 		"ejs": "^1.0.0",
 		"express": "^4.6.1",
