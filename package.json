@@ -2,7 +2,7 @@
 	"name": "daome",
 	"description": "Direct Access Object for Mongoose with Express.js",
 	"version": "1.0.0",
-	"license" : "private",
+	"license" : "GPL-3.0",
 	"main": "index.js",
 	"dependencies": {
 		"ejs": "^1.0.0",
