@@ -19,11 +19,17 @@
 
 ## Install
 
+From server side
 ```bash
 npm install daome
 ```
 
-## Server side API
+From client side
+```html
+<script src="/yourPath/dao/assets/app.js"></script>
+```
+
+## Introduction
 
 Mongoose provides the method to manage the model. DAOME does not include this feature.
 
@@ -31,21 +37,13 @@ That why you have to define your own model using Mongoose before anything.
 
 As DAOME provides the controller and views is it important to point that input validation is made by the model (Mongoose Model). But DAOME accepts access and priviledges control.
 
-```js
-const mongoose = require("mongoose");
-
-var mySchema = new Schema({
-	name: {type: String },
-	value: { type: String },
-});
-var myModel = mongoose.model('my', mySchema);
-```
-
 Server API is separed in 3 features:
 
 * The controller which will manage requests with express.js
-* The view
+* The view manager (server and client side)
 * The express.js initializer
+
+
 
 [gt-issues]: https://img.shields.io/github/issues/mykiimike/daome.svg
 [gt-licence]: https://img.shields.io/badge/license-GPLv3-blue.svg

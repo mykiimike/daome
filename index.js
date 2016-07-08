@@ -137,7 +137,6 @@ controller.prototype.publish = function() {
 			}
 	
 			jres.doc = ndoc;
-			console.log(ndoc);
 			res.json(jres);
 		});
 	});
