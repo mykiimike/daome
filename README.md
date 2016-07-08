@@ -1,11 +1,10 @@
 # Direct Access Object for Mongoose with Express.js
 
-[![Build Status](https://travis-ci.org/mykiimike/daome.svg)](https://travis-ci.org/mykiimike/daome)
+
 [![][gt-issues]][gt-issues]
 [![][gt-licence]][gt-licence]
 
 [![NPM](https://nodei.co/npm/daome.png?downloads)](https://nodei.co/npm/daome/)
-
 
 * Easy dataTable
 * Auto API
@@ -48,3 +47,5 @@ Server API is separed in 3 features:
 * The view
 * The express.js initializer
 
+[gt-issues]: https://img.shields.io/github/issues/mykiimike/daome.svg
+[gt-licence]: https://img.shields.io/badge/license-GPLv3-blue.svg
