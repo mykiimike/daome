@@ -200,6 +200,8 @@ class daome {
 			
 			var id = "daome-form-"+this.name+"-"+sName;
 			var el = document.getElementById(id);
+			if(!el)
+				continue;
 			el.disabled = false;
 			switch(sc.type) {
 				case "checkbox":
@@ -229,12 +231,18 @@ class daome {
 		this.formResetInputs();
 		
 		this.remotePost("id", {id: id}, function(data) {
+			if(!data) {
+				self.modalError("Can not get information");
+				return;
+			}
+			
 			if(typeof data.errors === "object" && data.errors.length > 0) {
 				for(var a in data.errors)
 					self.modalError(data.errors[a]);
 				return;
 			}
-			
+
+	
 			var doc = data.doc;
 			
 			for(var sName in self.schema) {
@@ -592,7 +600,7 @@ class daome {
 		
 		/* clean dst and push new */
 		this.cleanElement(dst);
-		console.log(dst, element);
+		
 		dst.appendChild(modal);
         
 		/* generate modal content */
