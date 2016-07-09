@@ -12,8 +12,8 @@
 * Auto modal (but require jquery)
 * Server and client 
 * Fine permission control possibility
-⋅⋅* By API type (create, update...) 
-⋅⋅* By Fields
+  * By API type (create, update...) 
+  * By Fields
 * Templates are based on EJS
 
 
