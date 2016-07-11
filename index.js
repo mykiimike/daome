@@ -172,6 +172,9 @@ controller.prototype.publish = function() {
 			delete req.body.id;
 	
 			for(var b in req.body) {
+				if(req.body[b].length == 0)
+					continue;
+				
 				if(typeof self.internalViews[b] == "object") {
 					if(self.permission(req, "update", b) == true)
 						doc[b] = req.body[b];
@@ -232,7 +235,7 @@ controller.prototype.publish = function() {
 				res.json(jres);
 				return;
 			}
-			console.log(realInput, err);
+			
 			if(err.name == "ValidationError") {
 				for(var a in err.errors)
 					errors.push(err.errors[a].message);
