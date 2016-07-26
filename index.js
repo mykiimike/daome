@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const express = require("express");
-
+const eventEmitter = require('events');
 const jen = new (require("node-jen"))();
 
 const mongoose = require('mongoose');
@@ -13,6 +13,7 @@ var controller = function(name, model) {
 	this.model = model;
 	this.internalViews = {};
 	this.internalSearch = [];
+	this.event = new eventEmitter;
 }
 
 controller.prototype.views = function(views) {
@@ -54,6 +55,7 @@ controller.prototype.publish = function() {
 			return;
 		}
 		
+		self.event.emit('schema', self.internalViews);
 		res.json(self.internalViews);
 	});
 	
@@ -97,6 +99,7 @@ controller.prototype.publish = function() {
 				jres.docs.push(ndoc);
 			}
 			
+			self.event.emit('search', jres);
 			res.json(jres);
 		});
 	});
@@ -137,14 +140,17 @@ controller.prototype.publish = function() {
 			}
 	
 			jres.doc = ndoc;
+			
+			self.event.emit('id', jres);
 			res.json(jres);
 		});
 	});
 	
 	app.post(path+'/update', function(req, res) {
+		
 		var errors = [];
 		var jres = {
-				errors: errors
+			errors: errors
 		};
 		
 		if(self.permission(req, "api", "update") != true) {
@@ -170,7 +176,7 @@ controller.prototype.publish = function() {
 				return;
 			}
 			delete req.body.id;
-	
+			
 			for(var b in req.body) {
 				if(req.body[b].length == 0)
 					continue;
@@ -182,18 +188,20 @@ controller.prototype.publish = function() {
 			}
 			
 			doc.save(function(err) {
+				
 				if(!err) {
+					self.event.emit('update', doc);
 					res.json(jres);
 					return;
 				}
-
+				
 				if(err.name == "ValidationError") {
 					for(var a in err.errors)
 						errors.push(err.errors[a].message);
 				}
 				else
 					errors.push("Some fields are already taken");
-				
+
 				res.json(jres);
 			});
 		});
@@ -232,6 +240,7 @@ controller.prototype.publish = function() {
 		var model = new (self.model)(realInput);
 		model.save(function(err) {
 			if(!err) {
+				self.event.emit('create', model);
 				res.json(jres);
 				return;
 			}
@@ -242,7 +251,7 @@ controller.prototype.publish = function() {
 			}
 			else
 				errors.push("Some fields are already taken");
-			
+
 			res.json(jres);
 		});
 	});
@@ -271,6 +280,7 @@ controller.prototype.publish = function() {
 
 		self.model.findOne({_id: req.body.id}).remove(function(err) {
 			if(!err) {
+				self.event.emit('remove', err);
 				res.json(jres);
 				return;
 			}
