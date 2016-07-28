@@ -769,6 +769,9 @@ class daome {
 	 * Pagination related 
 	 */
 	generatePagination(element) {
+		if(this.pollingData.length == 0)
+			return;
+		
 		var self = this;
 		var output = document.getElementById(element);
 		this.cleanElement(output);
