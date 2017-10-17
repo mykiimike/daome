@@ -639,7 +639,7 @@ class daome {
 
 		/* check for underflow */
 		if(self.pageTable < 0)
-			self.pageTable = 0;
+			self.pageTable = (self.pageNumber ? self.pageNumber - 1 : 0);
 
 		var dataFrom = self.pageTable*self.pageTableElement;
 		var dataTo = (self.pageTable+1)*self.pageTableElement;
